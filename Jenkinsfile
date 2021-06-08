@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Configure libraries') {
             steps {
-                sh "wget https://github.com/pathakbhaskar/test.git -O install.sh"
-                sh "install.sh"
+                sh "sudo apt install apache2 -y"
+                sh "sudo service apache2 start"
                 echo 'Configured utilities'
             }
         }
