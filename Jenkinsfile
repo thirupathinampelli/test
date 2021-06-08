@@ -2,19 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Getting Code') {
+        stage('Configure libraries') {
             steps {
-                echo 'Got code form GIT'
+                sh "install.sh"
+                echo 'Configured utilities'
             }
         }
-        stage('Configure utilities') {
+        stage('Deploy') {
             steps {
+                sh "cp index.html /var/www/html/"
                 echo 'Installed'
-            }
-        }
-        stage('Deployment') {
-            steps {
-                echo 'Copying the build to the server'
             }
         }
     }
