@@ -2,17 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Configure libraries') {
+        stage('Install Seomthing') {
             steps {
-                sh "sudo apt install apache2 -y"
-                sh "sudo service apache2 start"
-                echo 'Configured utilities'
+                sh 'sudo apt install apache2 -y'
             }
         }
-        stage('Deploy') {
+	stage('Get my code') {
             steps {
-                sh "sudo cp index.html /var/www/html/"
-                echo 'Deployed'
+                git credentialsId: '72ae0822-4c0e-4b36-964c-cd06664558ff', url: 'https://github.com/pathakbhaskar/test.git'
+            }
+        }
+	stage('Deploy') {
+            steps {
+                sh '''sudo cp -R * /var/www/html/
+                    sudo chmod -R 777 /var/www/html/'''
             }
         }
     }
